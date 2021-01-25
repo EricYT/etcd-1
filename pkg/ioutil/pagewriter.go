@@ -51,7 +51,7 @@ func NewPageWriter(w io.Writer, pageBytes, pageOffset int) *PageWriter {
 }
 
 func (pw *PageWriter) Write(p []byte) (n int, err error) {
-	if len(p)+pw.bufferedBytes <= pw.bufWatermarkBytes {
+	if len(p)+pw.bufferedBytes <= pw.pageBytes {
 		// no overflow
 		copy(pw.buf[pw.bufferedBytes:], p)
 		pw.bufferedBytes += len(p)
